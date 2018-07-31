@@ -33,6 +33,7 @@ class Region(UUIDModel):
         return '%s' % self.name
 
 class Prefecture(UUIDModel):
+    region = models.ForeignKey('Region', on_delete=models.PROTECT, verbose_name=_('地域'))
     order= models.SmallIntegerField(_('表示順'))
     name = models.CharField(_('都道府県名'), max_length=50)
     description = models.TextField(_('備考'), blank=True)
