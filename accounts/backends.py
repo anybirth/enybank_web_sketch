@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth import backends
-from .forms import UserForm
 
 class EmailModelBackend(backends.ModelBackend):
 
