@@ -4,8 +4,8 @@
 __pycache__/
 local_settings.py
 db.sqlite3
-/enyfar-otaku/media/*
-/enyfar-otaku/static/*
-!/enyfar-otaku/static/css/
-!/enyfar-otaku/static/img/
-!/enyfar-otaku/static/js/
+/enybank_web/media/*
+/enybank_web/static/*
+!/enybank_web/static/css/
+!/enybank_web/static/img/
+!/enybank_web/static/js/
