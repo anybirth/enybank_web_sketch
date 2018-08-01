@@ -1,9 +1,14 @@
-from django.db import models
+from django.contrib import auth
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import PermissionDenied
+from django.core.mail import send_mail
+from django.db import models
+from django.db.models.manager import EmptyManager
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.core.mail import send_mail
+from django.contrib.auth.models import PermissionsMixin
+from enum import Enum
 from main.models import UUIDModel
 
 # Create your models here.
@@ -39,7 +44,17 @@ class UserManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-class User(UUIDModel):
+
+class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
+
+    class GenderChoice(Enum):
+        male = '男性'
+        female = '女性'
+
+        @classmethod
+        def choices(cls):
+            return [(c.name, c.value) for c in cls]
+
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), unique=True, blank=True, null=True)
@@ -57,11 +72,12 @@ class User(UUIDModel):
         ),
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    prefecture = models.ForeignKey('main.Prefecture', on_delete=models.PROTECT, verbose_name=_('都道府県'), blank=True, null=True)
     zip_code = models.CharField(_('郵便番号'), max_length=50, blank=True)
     address = models.CharField(_('住所'), max_length=255, blank=True)
     address_name = models.CharField(_('氏名'), max_length=50, blank=True)
     birthday = models.DateField(_('生年月日'), blank=True, null=True)
-    gender = models.SmallIntegerField(_('性別'), blank=True, null=True)
+    gender = models.CharField(_('性別'), max_length=50, choices=GenderChoice.choices(), blank=True, null=True)
     facebook_id = models.CharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
     line_id = models.CharField(_('LINE ID'), max_length=255, unique=True, blank=True, null=True)
     is_line_only = models.BooleanField(_('LINEのみのユーザー'), default=False)
@@ -69,6 +85,11 @@ class User(UUIDModel):
     hopes_newsletters = models.BooleanField(_('配信希望'), default=False)
     created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
     updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
+
+    objects = UserManager()
+
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'email'
 
     class Meta:
       db_table = 'users'

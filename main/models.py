@@ -10,11 +10,13 @@ def get_image_path(instance, filename):
     extension = os.path.splitext(filename)[-1]
     return name + extension
 
+
 class UUIDModel(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     class Meta:
         abstract = True
+
 
 class Region(UUIDModel):
     order = models.SmallIntegerField(_('表示順'))
@@ -22,6 +24,8 @@ class Region(UUIDModel):
     description = models.TextField(_('備考'), blank=True)
     postage = models.IntegerField(_('追加送料'), default=0)
     is_supported = models.BooleanField(_('対応中'), default=True)
+    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
     class Meta:
         db_table = 'regions'
@@ -32,12 +36,15 @@ class Region(UUIDModel):
     def __str__(self):
         return '%s' % self.name
 
+
 class Prefecture(UUIDModel):
     region = models.ForeignKey('Region', on_delete=models.PROTECT, verbose_name=_('地域'))
     order= models.SmallIntegerField(_('表示順'))
     name = models.CharField(_('都道府県名'), max_length=50)
     description = models.TextField(_('備考'), blank=True)
     is_supported = models.BooleanField(_('対応中'), default=True)
+    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
     class Meta:
         db_table = 'prefectures'
@@ -47,6 +54,7 @@ class Prefecture(UUIDModel):
 
     def __str__(self):
         return '%s' % self.name
+
 
 class Size(UUIDModel):
     name = models.CharField(_('サイズ名'), max_length=50)
@@ -64,6 +72,7 @@ class Size(UUIDModel):
 
     def __str__(self):
         return '%s' % self.name
+
 
 class Type(UUIDModel):
 
@@ -100,6 +109,7 @@ class Type(UUIDModel):
         self.image.delete()
         super().delete(*args, **kwargs)
 
+
 class ColorCategory(UUIDModel):
     name = models.CharField(_('カラー分類名'), max_length=50)
     description = models.TextField(_('備考'), blank=True)
@@ -116,6 +126,7 @@ class ColorCategory(UUIDModel):
     def __str__(self):
         return '%s' % self.name
 
+
 class Bland(UUIDModel):
     name = models.CharField(_('ブランド名'), max_length=50)
     description = models.TextField(_('備考'), blank=True)
@@ -130,6 +141,7 @@ class Bland(UUIDModel):
 
     def __str__(self):
         return '%s' % self.name
+
 
 class Series(UUIDModel):
     bland = models.ForeignKey('Bland', on_delete=models.PROTECT, verbose_name=_('ブランド'))
@@ -146,6 +158,7 @@ class Series(UUIDModel):
 
     def __str__(self):
         return '%s' % self.name
+
 
 class Item(UUIDModel):
     bland = models.ForeignKey('Bland', on_delete=models.PROTECT, verbose_name=_('ブランド'))
@@ -193,6 +206,7 @@ class Item(UUIDModel):
             starting_point=5
         )
 
+
 class ItemFeeCoef(UUIDModel):
     item = models.ForeignKey('Item', on_delete=models.CASCADE, verbose_name=_('アイテム'), related_name='item_fee_coef_set')
     fee_coef = models.IntegerField(_('料金係数'))
@@ -209,6 +223,7 @@ class ItemFeeCoef(UUIDModel):
 
     def __str__(self):
         return '%s' % self.item.name
+
 
 class ItemImage(UUIDModel):
 
@@ -246,6 +261,7 @@ class ItemImage(UUIDModel):
         self.image.delete()
         super().delete(*args, **kwargs)
 
+
 class Reservation(UUIDModel):
     user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, verbose_name=_('ユーザー'))
     item = models.ForeignKey('Item', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('アイテム'))
@@ -273,6 +289,7 @@ class Reservation(UUIDModel):
     def __str__(self):
         return '%s' % self.user
 
+
 class Question(UUIDModel):
     order = models.SmallIntegerField(_('表示順'))
     text = models.TextField(_('質問'))
@@ -288,6 +305,7 @@ class Question(UUIDModel):
 
     def __str__(self):
         return '%s' % self.text
+
 
 class Answer(UUIDModel):
     reservation = models.ForeignKey('Reservation', on_delete=models.PROTECT, verbose_name=_('予約'))
