@@ -3,6 +3,8 @@
 {% load static %}
 {% block content %}
 
+<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}" class="button">Facebookでログイン</a></p>
+
 <form action="" method="post">
   {{ form }}
   {% csrf_token %}
