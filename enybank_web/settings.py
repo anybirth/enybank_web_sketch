@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'accounts.User'
 
 AUTHENTICATION_BACKENDS = [
-    'accounts.backends.EmailModelBackend'
+    'accounts.backends.EmailModelBackend',
     'social_core.backends.facebook.FacebookOAuth2',
 ]
 
