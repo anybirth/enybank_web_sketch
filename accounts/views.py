@@ -39,3 +39,7 @@ class SignupView(generic.CreateView):
             fail_silently=False,
         )
         return super().form_valid(form)
+
+
+class CompleteView(generic.TemplateView):
+    template_name = 'accounts/complete.html'
