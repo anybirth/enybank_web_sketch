@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% load static %}
+{% block content %}
+
+<p>index</p>
+
+<input id='start_date' type="date" name="calendar">
+<input id='return_date' type="date" name="calendar">
+<select name="color_categories">
+  <option value="">--------</option>
+  {% for color in color_categories %}
+  <option value="{{ color.uuid }}">{{ color.name }}</option>
+  {% endfor %}
+</select>
+
+<select name="types">
+  <option value="">--------</option>
+  {% for type in types %}
+  <option value="{{ type.uuid }}">{{ type.name }}</option>
+  {% endfor %}
+</select>
+
+<p class="text-center"><a id="search" href="{% url 'accounts:search' %}" class="button">search</a></p>
+
+<script>
+$(function() {
+
+  $('#search').on('click', function() {
+    var start_date = $('#start_date').val();
+    var return_date = $('#return_date').val();
+    var color_category = $('[name=color_categories]').val();
+    var type = $('[name=types]').val();
+
+    if (start_date && return_date && color_category && type) {
+      var _href = $(this).attr("href");
+      $(this).attr("href", _href + '?start_date=' + start_date + '&return_date=' + return_date + '&color_category=' + color_category + '&type=' + type);
+    } else {
+      alert('Please select all elements.');
+      return false;
+    }
+  });
+});
+</script>
+
+
+
+{% endblock %}
