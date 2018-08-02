@@ -70,6 +70,10 @@ class ActivateView(generic.TemplateView):
         return super().get(request, uuid)
 
 
+class ActivateExpiredView(generic.TemplateView):
+    template_name = 'accounts/activate_expired.html'
+
+
 class LoginView(auth_views.LoginView):
     template_name = 'accounts/login.html'
 
