@@ -56,6 +56,10 @@ class LoginView(auth_views.LoginView):
         return super().get(request)
 
 
+class LogoutView(auth_views.LogoutView):
+    next_page = reverse_lazy('accounts:login')
+
+
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.TemplateView):
     template_name = 'accounts/profile.html'
