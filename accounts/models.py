@@ -82,7 +82,7 @@ class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
     line_id = models.CharField(_('LINE ID'), max_length=255, unique=True, blank=True, null=True)
     is_line_only = models.BooleanField(_('LINEのみのユーザー'), default=False)
     is_verified = models.BooleanField(_('認証完了'), default=False)
-    hopes_newsletters = models.BooleanField(_('配信希望'), default=False)
+    hopes_newsletters = models.BooleanField(_('配信希望'), default=True)
     created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
     updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
