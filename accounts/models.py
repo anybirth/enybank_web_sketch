@@ -36,6 +36,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('hopes_newsletters', False)
 
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
@@ -82,7 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
     line_id = models.CharField(_('LINE ID'), max_length=255, unique=True, blank=True, null=True)
     is_line_only = models.BooleanField(_('LINEのみのユーザー'), default=False)
     is_verified = models.BooleanField(_('認証完了'), default=False)
-    hopes_newsletters = models.BooleanField(_('配信希望'), default=False)
+    hopes_newsletters = models.BooleanField(_('配信希望'), default=True)
     created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
     updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
 
