@@ -3,12 +3,16 @@
 {% load static %}
 {% block content %}
 
-<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}?next={% url 'accounts:signup_social' %}" class="button">Facebookでログイン</a></p>
+<p>signup<p>
+
+<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}?next={% url 'accounts:signup_social' %}" class="button">Facebook Login</a></p>
 
 <form action="" method="post">
   {{ form }}
   {% csrf_token %}
-  <p class="text-center"><input type="submit" value="登録" class="button"></p>
+  <p class="text-center"><input type="submit" value="signup" class="button"></p>
 </form>
+
+<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}?next={% url 'accounts:login' %}">login</a></p>
 
 {% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% load static %}
+{% block content %}
+
+{% if request.user.social_auth.all.length == 0 %}
+<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}" class="button">associate with Facebook</a></p>
+{% else %}
+<p class="text-center"><a href="#" class="disabled button">associate with Facebook</a></p>
+{% endif %}
+
+{% endblock %}

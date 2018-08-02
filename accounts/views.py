@@ -112,3 +112,8 @@ class LogoutView(auth_views.LogoutView):
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.TemplateView):
     template_name = 'accounts/profile.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class AssociateView(generic.TemplateView):
+    template_name = 'accounts/associate.html'
