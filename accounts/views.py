@@ -47,6 +47,15 @@ class CompleteView(generic.TemplateView):
     template_name = 'accounts/complete.html'
 
 
+class LoginView(auth_views.LoginView):
+    template_name = 'accounts/login.html'
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('accounts:profile')
+        return super().get(request)
+
+
 @method_decorator(login_required, name='dispatch')
 class ProfileView(generic.TemplateView):
     template_name = 'accounts/profile.html'
