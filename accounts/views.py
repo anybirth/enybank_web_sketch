@@ -1,10 +1,12 @@
-from django.views import generic
-from django.urls import reverse_lazy
 from django.conf import settings
-from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password
+from django.urls import reverse_lazy
+from django.views import generic
 from django.core.mail import send_mail
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
 from . import models, forms
 # Create your views here.
 
@@ -43,3 +45,8 @@ class SignupView(generic.CreateView):
 
 class CompleteView(generic.TemplateView):
     template_name = 'accounts/complete.html'
+
+
+@method_decorator(login_required, name='dispatch')
+class ProfileView(generic.TemplateView):
+    template_name = 'accounts/profile.html'
