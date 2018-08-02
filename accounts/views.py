@@ -47,6 +47,29 @@ class CompleteView(generic.TemplateView):
     template_name = 'accounts/complete.html'
 
 
+class ActivateView(generic.TemplateView):
+    template_name = 'accounts/activate.html'
+
+    def get(self, request, uuid):
+        try:
+            user = models.User.objects.get(uuid=uuid)
+        except models.User.DoesNotExist:
+            return redirect('accounts:activate_expired')
+        if user.is_verified:
+            return redirect('accounts:activate_expired')
+        user.is_verified = True
+        user.save()
+
+        send_mail(
+            u'メールアドレス認証完了',
+            u'メールアドレス認証完了が完了しました。',
+            'info@anybirth.co.jp',
+            [user.email],
+            fail_silently=False,
+        )
+        return super().get(request, uuid)
+
+
 class LoginView(auth_views.LoginView):
     template_name = 'accounts/login.html'
 
