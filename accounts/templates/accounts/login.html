@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 
-<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}" class="button">Facebookでログイン</a></p>
+<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}?next={% url 'accounts:signup_social' %}" class="button">Facebookでログイン</a></p>
 
 <form action="" method="post">
   {{ form }}
