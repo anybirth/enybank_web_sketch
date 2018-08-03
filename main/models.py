@@ -263,7 +263,24 @@ class ItemImage(UUIDModel):
         super().delete(*args, **kwargs)
 
 
+class Cart(UUIDModel):
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('ユーザー'))
+    description = models.TextField(_('備考'), blank=True)
+    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
+
+    class Meta:
+        db_table = 'carts'
+        ordering = ['-created_at']
+        verbose_name = _('カート')
+        verbose_name_plural = _('カート')
+
+    def __str__(self):
+        return '%s' % self.text
+
+
 class Reservation(UUIDModel):
+    cart = models.ForeignKey('Cart', on_delete=models.PROTECT, verbose_name=_('カート'))
     user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('ユーザー'))
     item = models.ForeignKey('Item', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('アイテム'))
     size = models.ForeignKey('Size', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('サイズ'))
@@ -289,22 +306,6 @@ class Reservation(UUIDModel):
 
     def __str__(self):
         return '%s' % self.user
-
-
-class Cart(UUIDModel):
-    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('ユーザー'))
-    description = models.TextField(_('備考'), blank=True)
-    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
-
-    class Meta:
-        db_table = 'carts'
-        ordering = ['-created_at']
-        verbose_name = _('カート')
-        verbose_name_plural = _('カート')
-
-    def __str__(self):
-        return '%s' % self.text
 
 
 class Coupon(UUIDModel):
