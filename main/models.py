@@ -264,7 +264,7 @@ class ItemImage(UUIDModel):
 
 
 class Reservation(UUIDModel):
-    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, verbose_name=_('ユーザー'))
+    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('ユーザー'))
     item = models.ForeignKey('Item', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('アイテム'))
     size = models.ForeignKey('Size', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('サイズ'))
     type = models.ForeignKey('Type', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('タイプ'))
