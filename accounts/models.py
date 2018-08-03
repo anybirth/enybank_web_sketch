@@ -74,6 +74,7 @@ class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     prefecture = models.ForeignKey('main.Prefecture', on_delete=models.PROTECT, verbose_name=_('都道府県'), blank=True, null=True)
+    item_in_cart = models.ManyToManyField('main.Item', related_name='item_in_cart_set', verbose_name=_('カート内のアイテム'))
     zip_code = models.CharField(_('郵便番号'), max_length=50, blank=True)
     address = models.CharField(_('住所'), max_length=255, blank=True)
     address_name = models.CharField(_('氏名'), max_length=50, blank=True)
