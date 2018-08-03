@@ -3,6 +3,8 @@
 {% load static %}
 {% block content %}
 
+<p>associate with Facebook</p>
+
 {% if request.user.social_auth.all.length == 0 %}
 <p class="text-center"><a href="{% url 'social:begin' 'facebook' %}" class="button">associate with Facebook</a></p>
 {% else %}

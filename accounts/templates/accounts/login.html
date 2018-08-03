@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 
-<p>login<p>
+<p>login</p>
 
 <p class="text-center"><a href="{% url 'social:begin' 'facebook' %}?next={% url 'accounts:signup_social' %}" class="button">Facebook Login</a></p>
 
@@ -13,6 +13,6 @@
   <p class="text-center"><input type="submit" value="login" class="button"></p>
 </form>
 
-<p class="text-center"><a href="{% url 'social:begin' 'facebook' %}?next={% url 'accounts:signup' %}" class="button secondary">signup</a></p>
+<p class="text-center"><a href="{% url 'accounts:signup' %}">signup</a></p>
 
 {% endblock %}
