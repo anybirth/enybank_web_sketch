@@ -74,7 +74,7 @@ class ReservationInline(admin.TabularInline):
     extra = 0
     can_delete = False
     show_change_link = True
-    exclude = ['size', 'type', 'zip_code', 'address', 'address_name', 'item_fee', 'postage', 'description']
+    fields = ['item', 'prefecture', 'start_date', 'return_date', 'email', 'total_fee', 'status']
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0

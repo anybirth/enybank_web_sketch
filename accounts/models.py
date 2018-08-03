@@ -56,6 +56,18 @@ class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
         def choices(cls):
             return [(c.name, c.value) for c in cls]
 
+    class AgeRangeChoice(Enum):
+        teens = '～10代'
+        twenties = '20代'
+        thirties = '30代'
+        forties = '40代'
+        fifties = '50代'
+        sixties = '60代～'
+
+        @classmethod
+        def choices(cls):
+            return [(c.name, c.value) for c in cls]
+
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), unique=True, blank=True, null=True)
@@ -75,10 +87,12 @@ class User(AbstractBaseUser, PermissionsMixin, UUIDModel):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     prefecture = models.ForeignKey('main.Prefecture', on_delete=models.PROTECT, verbose_name=_('都道府県'), blank=True, null=True)
     zip_code = models.CharField(_('郵便番号'), max_length=50, blank=True)
-    address = models.CharField(_('住所'), max_length=255, blank=True)
+    city = models.CharField(_('市区町村'), max_length=50, blank=True)
+    address = models.CharField(_('番地・建物名'), max_length=255, blank=True)
     address_name = models.CharField(_('氏名'), max_length=50, blank=True)
-    birthday = models.DateField(_('生年月日'), blank=True, null=True)
+    address_name_kana = models.CharField(_('フリガナ'), max_length=50, blank=True)
     gender = models.CharField(_('性別'), max_length=50, choices=GenderChoice.choices(), blank=True, null=True)
+    age_range = models.CharField(_('年齢層'), max_length=50, choices=AgeRangeChoice.choices(), blank=True, null=True)
     facebook_id = models.CharField(_('Facebook ID'), max_length=255, unique=True, blank=True, null=True)
     line_id = models.CharField(_('LINE ID'), max_length=255, unique=True, blank=True, null=True)
     is_line_only = models.BooleanField(_('LINEのみのユーザー'), default=False)
