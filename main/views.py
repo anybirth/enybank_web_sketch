@@ -1,5 +1,6 @@
 import uuid
 from datetime import date, datetime, timedelta
+from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import render, redirect
 from . import models, forms
@@ -64,16 +65,18 @@ class SearchView(generic.ListView):
         return context
 
     def post(self, request):
-        if 'cart' in request.session:
-            cart, created = models.Cart.objects.get_or_create(uuid=request.session.get('cart'))
-            if created:
-                request.session['cart'] = cart.uuid
+        if request.user.is_authenticated:
+            cart, _ = models.Cart.objects.get_or_create(user=request.user)
+            request.session['cart'] = str(cart.uuid)
+        elif 'cart' in request.session and not request.user.is_authenticated:
+            cart, _ = models.Cart.objects.get_or_create(uuid=request.session.get('cart'))
+            request.session['cart'] = str(cart.uuid)
         else:
             _uuid = str(uuid.uuid4())
-            request.session['cart'] = _uuid
             new_cart = models.Cart(uuid=_uuid)
             new_cart.save()
             cart = models.Cart.objects.get(uuid=_uuid)
+            request.session['cart'] = _uuid
 
         reservation = models.Reservation(
             cart=cart,
@@ -86,3 +89,39 @@ class SearchView(generic.ListView):
             reservation.user = request.user
         reservation.save()
         return redirect('main:cart', permanent=True)
+
+
+class CartView(generic.ListView):
+    model = models.Reservation
+    context_object_name = 'reservations'
+    template_name = 'main/cart.html'
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            cart, _ = models.Cart.objects.get_or_create(user=self.request.user)
+            self.request.session['cart'] = str(cart.uuid)
+        elif 'cart' in self.request.session and not self.request.user.is_authenticated:
+            cart, _ = models.Cart.objects.get_or_create(uuid=self.request.session.get('cart'))
+            self.request.session['cart'] = str(cart.uuid)
+        else:
+            _uuid = str(uuid.uuid4())
+            new_cart = models.Cart(uuid=_uuid)
+            new_cart.save()
+            cart = models.Cart.objects.get(uuid=_uuid)
+            self.request.session['cart'] = _uuid
+        return models.Reservation.objects.filter(cart=cart, status=1).order_by('-created_at')
+
+    def post(self, request):
+        request.session['reservation'] = request.POST.get('reservation')
+        return redirect('main:rental')
+
+
+class RentalView(generic.UpdateView):
+    model = models.Reservation
+    form_class = forms.RentalForm
+    template_name = 'main/rental.html'
+    success_url = reverse_lazy('main:rental_confirm')
+
+    def get_object(self, queryset=None):
+        obj = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
+        return obj

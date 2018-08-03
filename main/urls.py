@@ -5,4 +5,6 @@ app_name = 'main'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('search/', views.SearchView.as_view(), name='search'),
+    path('cart/', views.CartView.as_view(), name='cart'),
+    path('rental/', views.RentalView.as_view(), name='rental'),
 ]
