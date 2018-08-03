@@ -276,7 +276,7 @@ class Cart(UUIDModel):
         verbose_name_plural = _('カート')
 
     def __str__(self):
-        return '%s' % self.text
+        return '%s' % self.uuid
 
 
 class Reservation(UUIDModel):
@@ -305,7 +305,7 @@ class Reservation(UUIDModel):
         verbose_name_plural = _('予約')
 
     def __str__(self):
-        return '%s' % self.user
+        return '%s' % self.item
 
 
 class Coupon(UUIDModel):
@@ -329,7 +329,7 @@ class Coupon(UUIDModel):
         verbose_name_plural = _('クーポン')
 
     def __str__(self):
-        return '%s' % self.text
+        return '%s' % self.coupon_code
 
 
 class Question(UUIDModel):
