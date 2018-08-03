@@ -293,7 +293,6 @@ class Reservation(UUIDModel):
 
 class Cart(UUIDModel):
     user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('ユーザー'))
-    reservation = models.ForeignKey('Reservation', on_delete=models.PROTECT, verbose_name=_('予約'))
     description = models.TextField(_('備考'), blank=True)
     created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
     updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
