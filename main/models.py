@@ -1,5 +1,6 @@
 import os
 import uuid
+import random
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -288,6 +289,30 @@ class Reservation(UUIDModel):
 
     def __str__(self):
         return '%s' % self.user
+
+
+class Coupon(UUIDModel):
+
+    def generate_coupon_code():
+        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        return ''.join(random.choices(letters, k=10))
+
+    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, verbose_name=_('ユーザー'))
+    coupon_code = models.CharField(_('クーポンコード'), max_length=50, default=generate_coupon_code, unique=True)
+    discount = models.IntegerField(_('割引額'))
+    status = models.SmallIntegerField(_('ステータス'), default=0)
+    description = models.TextField(_('備考'), blank=True)
+    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
+
+    class Meta:
+        db_table = 'coupons'
+        ordering = ['-created_at']
+        verbose_name = _('クーポン')
+        verbose_name_plural = _('クーポン')
+
+    def __str__(self):
+        return '%s' % self.text
 
 
 class Question(UUIDModel):
