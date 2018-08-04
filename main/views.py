@@ -227,3 +227,42 @@ class RentalCompleteView(generic.CreateView):
             fail_silently=False,
         )
         return super().form_valid(form)
+
+class RentalCompleteSocialView(generic.View):
+
+    def get(self, request):
+        user = request.user
+        if 'reservation' in self.request.session:
+            try:
+                reservation = models.Reservation.objects.get(uuid=request.session.get('reservation'))
+                reservation.user = user
+                try:
+                    cart = models.Cart.objects.get(user=request.user)
+                    reservation.cart = cart
+                    request.session['cart'] = str(cart.uuid)
+                except models.Cart.DoesNotExist:
+                    pass
+                reservation.save()
+                request.user.zip_code = reservation.zip_code
+                request.user.prefecture = reservation.prefecture
+                request.user.city = reservation.city
+                request.user.address = reservation.address
+                request.user.address_name = reservation.address_name
+                request.user.address_name_kana = reservation.address_name_kana
+                request.user.gender = reservation.gender
+                request.user.age_range = reservation.age_range
+                request.user.save()
+            except models.Reservation.DoesNotExist:
+                pass
+            del request.session['reservation']
+        if 'cart' in request.session:
+            try:
+                _ = models.Cart.objects.get(user=request.user)
+            except models.Cart.DoesNotExist:
+                try:
+                    cart = models.Cart.objects.get(uuid=request.session.get('cart'))
+                    cart.user = request.user
+                    cart.save()
+                except models.Cart.DoesNotExist:
+                    pass
+        return redirect('accounts:signup_social', permanent=True)
