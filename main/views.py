@@ -86,6 +86,15 @@ class SearchView(generic.ListView):
         )
         if request.user.is_authenticated:
             reservation.user = request.user
+            reservation.zip_code = request.user.zip_code
+            reservation.prefecture = request.user.prefecture
+            reservation.city = request.user.city
+            reservation.address = request.user.address
+            reservation.address_name = request.user.address_name
+            reservation.address_name_kana = request.user.address_name_kana
+            reservation.email = request.user.email
+            reservation.gender = request.user.gender
+            reservation.age_range = request.user.age_range
         reservation.save()
         return redirect('main:cart', permanent=True)
 
@@ -137,17 +146,28 @@ class RentalConfirmView(generic.DetailView):
 class RentalCheckoutView(generic.View):
 
     def post(self, request):
+        reservation = models.Reservation.objects.get(uuid=request.session.get('reservation'))
+
         stripe.api_key = settings.STRIPE_API_KEY
         token = request.POST.get('stripeToken')
-
-        reservation = models.Reservation.objects.get(uuid=request.session.get('reservation'))
         charge = stripe.Charge.create(
             amount=reservation.total_fee,
             currency='jpy',
             description='支払い',
             source=token,
         )
+
         reservation.status = 0
-        reservation.save()
-        del request.session['reservation']
+        if request.user.is_authenticated:
+            request.user.zip_code = reservation.zip_code
+            request.user.prefecture = reservation.prefecture
+            request.user.city = reservation.city
+            request.user.address = reservation.address
+            request.user.address_name = reservation.address_name
+            request.user.address_name_kana = reservation.address_name_kana
+            request.user.email = reservation.email
+            request.user.gender = reservation.gender
+            request.user.age_range = reservation.age_range
+            del request.session['reservation']
+        request.user.save()
         return redirect(reverse_lazy('main:rental_complete'), permanent=True)
