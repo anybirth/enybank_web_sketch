@@ -120,3 +120,13 @@ class RentalView(generic.UpdateView):
     def get_object(self, queryset=None):
         obj = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
         return obj
+
+
+class RentalConfirmView(generic.DetailView):
+    model = models.Reservation
+    context_object_name = 'reservation'
+    template_name = 'main/rental_confirm.html'
+
+    def get_object(self, queryset=None):
+        obj = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
+        return obj

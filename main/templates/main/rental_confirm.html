@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% load static %}
+{% block content %}
+
+<p>rental confirm</p>
+<p>{{ reservation }}</p>
+
+{% for item_image in reservation.item.item_image_set.all %}
+<img style="width:250px;" src="{{ item_image.image.url }}">
+{% endfor %}
+
+<form action="{% url 'main:rental_checkout' %}" method="POST">
+  {% csrf_token %}
+  <p class="text-center">
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_Ht65fJK5QQKbqmVcD0XLK52t"
+      data-amount="1000"
+      data-name="支払い"
+      data-description="レンタル料の支払いです"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto"
+      data-currency="jpy">
+    </script>
+  </p>
+</form>
+
+<p class="text-center"><a href="{% url 'main:cart' %}">back to cart</a></p>
+
+{% endblock %}
