@@ -1,6 +1,8 @@
 import uuid
+import stripe
 from datetime import date, datetime, timedelta
 from django.urls import reverse_lazy
+from django.conf import settings
 from django.views import generic
 from django.shortcuts import render, redirect
 from . import models, forms
@@ -130,3 +132,22 @@ class RentalConfirmView(generic.DetailView):
     def get_object(self, queryset=None):
         obj = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
         return obj
+
+
+class RentalCheckoutView(generic.View):
+
+    def post(self, request):
+        stripe.api_key = settings.STRIPE_API_KEY
+        token = request.POST.get('stripeToken')
+
+        reservation = models.Reservation.objects.get(uuid=request.session.get('reservation'))
+        charge = stripe.Charge.create(
+            amount=reservation.total_fee,
+            currency='jpy',
+            description='支払い',
+            source=token,
+        )
+        reservation.status = 0
+        reservation.save()
+        del request.session['reservation']
+        return redirect(reverse_lazy('main:rental_complete'), permanent=True)
