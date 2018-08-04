@@ -9,4 +9,5 @@ urlpatterns = [
     path('rental/', views.RentalView.as_view(), name='rental'),
     path('rental/confirm/', views.RentalConfirmView.as_view(), name='rental_confirm'),
     path('rental/checkout/', views.RentalCheckoutView.as_view(), name='rental_checkout'),
+    path('rental/complete/', views.RentalCompleteView.as_view(), name='rental_complete'),
 ]

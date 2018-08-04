@@ -3,8 +3,12 @@ import stripe
 from datetime import date, datetime, timedelta
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.core.mail import send_mail
 from django.views import generic
 from django.shortcuts import render, redirect
+from django.contrib.auth.hashers import make_password
+from accounts.models import User
+from accounts.forms import UserForm
 from . import models, forms
 
 # Create your views here.
@@ -158,6 +162,7 @@ class RentalCheckoutView(generic.View):
         )
 
         reservation.status = 0
+        reservation.save()
         if request.user.is_authenticated:
             request.user.zip_code = reservation.zip_code
             request.user.prefecture = reservation.prefecture
@@ -165,9 +170,60 @@ class RentalCheckoutView(generic.View):
             request.user.address = reservation.address
             request.user.address_name = reservation.address_name
             request.user.address_name_kana = reservation.address_name_kana
-            request.user.email = reservation.email
             request.user.gender = reservation.gender
             request.user.age_range = reservation.age_range
+            request.user.save()
             del request.session['reservation']
-        request.user.save()
         return redirect(reverse_lazy('main:rental_complete'), permanent=True)
+
+
+class RentalCompleteView(generic.CreateView):
+    model = User
+    form_class = UserForm
+    template_name = 'main/rental_complete.html'
+    success_url = reverse_lazy('accounts:complete')
+
+    def form_valid(self, form):
+        form.instance.password = make_password(self.request.POST.get('password'))
+        _uuid = str(uuid.uuid4())
+        new_user = form.save(commit=False)
+        new_user.uuid = _uuid
+        new_user.save()
+        user = User.objects.get(uuid=_uuid)
+        if 'reservation' in self.request.session:
+            try:
+                reservation = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
+                reservation.user = user
+                reservation.save()
+                request.user.zip_code = reservation.zip_code
+                request.user.prefecture = reservation.prefecture
+                request.user.city = reservation.city
+                request.user.address = reservation.address
+                request.user.address_name = reservation.address_name
+                request.user.address_name_kana = reservation.address_name_kana
+                request.user.gender = reservation.gender
+                request.user.age_range = reservation.age_range
+                request.user.save()
+            except models.Reservation.DoesNotExist:
+                pass
+            del self.request.session['reservation']
+        if 'cart' in self.request.session:
+            try:
+                cart = models.Cart.objects.get(uuid=self.request.session.get('cart'))
+                cart.user = user
+                cart.save()
+            except models.Cart.DoesNotExist:
+                pass
+
+        protocol = 'https://' if self.request.is_secure() else 'http://'
+        host_name = settings.HOST_NAME
+        send_mail(
+            u'会員登録完了',
+            u'会員登録が完了しました。\n' +
+            '以下のURLより、メールアドレスの認証を行ってください。\n\n' +
+            protocol + host_name + str(reverse_lazy('accounts:activate', args=[user.uuid,])),
+            'info@anybirth.co.jp',
+            [user.email],
+            fail_silently=False,
+        )
+        return super().form_valid(form)
