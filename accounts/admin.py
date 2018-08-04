@@ -41,7 +41,7 @@ class GroupAdmin(BaseGroupAdmin):
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'line_id', 'facebook_id', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'zip_code', 'prefecture', 'address', 'address_name', 'birthday', 'gender', 'is_line_only', 'is_verified', 'hopes_newsletters')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'zip_code', 'prefecture', 'city', 'address', 'address_name', 'address_name_kana', 'age_range', 'gender', 'is_line_only', 'is_verified', 'hopes_newsletters')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -55,9 +55,10 @@ class UserAdmin(BaseUserAdmin):
     form = EmailUserChangeForm
     add_form = EmailUserCreationForm
     list_display = ('email', 'line_id', 'first_name', 'last_name', 'is_staff')
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'prefecture', 'birthday', 'gender', 'created_at', 'updated_at')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'prefecture', 'age_range', 'gender', 'created_at', 'updated_at')
     search_fields = ('email', 'line_id', 'facebook_id', 'first_name', 'last_name', 'zip_code', 'address', 'address_name')
     ordering = ('-created_at', )
     filter_horizontal = ('groups', 'user_permissions',)
+    inlines = [ReservationInline]
 
 admin.site.register(models.User, UserAdmin)

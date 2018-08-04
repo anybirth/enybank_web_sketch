@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock %}
+{% load static %}
+{% block content %}
+
+<p>search</p>
+
+{% for item in items %}
+<p>{{ item }}</p>
+<p>{{ fee }}</p>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <p class="text-center"><button type="submit" name="item" value="{{ item.uuid }}" class="button">reserve→</button></p>
+</form>
+{% endfor %}
+
+<p class="text-center"><a href="{% url 'main:index' %}" class="button secondary">←back to home</a></p>
+
+{% endblock %}

@@ -14,7 +14,7 @@ class PrefectureInline(admin.TabularInline):
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
         if obj:
-            max_num = obj.item_set.count()
+            max_num = obj.prefecture_set.count()
         return max_num
 
 class SeriesInline(admin.TabularInline):
@@ -27,7 +27,7 @@ class SeriesInline(admin.TabularInline):
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
         if obj:
-            max_num = obj.item_set.count()
+            max_num = obj.series_set.count()
         return max_num
 
 class ItemInline(admin.TabularInline):
@@ -74,7 +74,7 @@ class ReservationInline(admin.TabularInline):
     extra = 0
     can_delete = False
     show_change_link = True
-    exclude = ['size', 'type', 'zip_code', 'address', 'address_name', 'item_fee', 'postage']
+    fields = ['item', 'prefecture', 'start_date', 'return_date', 'email', 'total_fee', 'status']
 
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
@@ -92,7 +92,7 @@ class AnswerInline(admin.TabularInline):
     def get_max_num(self, request, obj=None, **kwargs):
         max_num = 0
         if obj:
-            max_num = obj.reservation_set.count()
+            max_num = obj.answer_set.count()
         return max_num
 
 class RegionAdmin(admin.ModelAdmin):
@@ -138,11 +138,22 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = ['name', 'description', 'bland__name', 'series__name', 'size__name', 'type__name', 'color_category__name', 'color']
     inlines = [ItemFeeCoefInline, ItemImageInline, ReservationInline]
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('uuid', 'user', 'created_at', 'updated_at')
+    list_filter = ['created_at', 'updated_at']
+    search_fields = ['user__first_name', 'user__last_name', 'user__address_name']
+    inlines = [ReservationInline]
+
 class ReservationAdmin(admin.ModelAdmin):
     list_display = ('address_name', 'item', 'total_fee', 'start_date', 'return_date', 'address', 'status')
     list_filter = ['start_date', 'return_date', 'item__bland', 'status']
     search_fields = ['name', 'zip_code' 'address', 'size', 'type', 'user__first_name', 'user__last_name', 'user__address_name', 'item__name', 'item__bland__name', 'item__series_name', 'item__color__name']
     inlines = [AnswerInline]
+
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ('coupon_code', 'user', 'coupon_code', 'discount', 'status')
+    list_filter = ['status']
+    search_fields = ['coupon_code', 'user__first_name', 'user__last_name', 'user__address_name', 'discount', 'description']
 
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('order', 'text', 'is_public')
@@ -158,5 +169,7 @@ admin.site.register(models.ColorCategory, ColorCategoryAdmin)
 admin.site.register(models.Bland, BlandAdmin)
 admin.site.register(models.Series, SeriesAdmin)
 admin.site.register(models.Item, ItemAdmin)
+admin.site.register(models.Cart, CartAdmin)
 admin.site.register(models.Reservation, ReservationAdmin)
+admin.site.register(models.Coupon, CouponAdmin)
 admin.site.register(models.Question, QuestionAdmin)

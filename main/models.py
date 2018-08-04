@@ -1,5 +1,7 @@
 import os
 import uuid
+import random
+from enum import Enum
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -262,16 +264,60 @@ class ItemImage(UUIDModel):
         super().delete(*args, **kwargs)
 
 
+class Cart(UUIDModel):
+    user = models.OneToOneField('accounts.User', on_delete=models.CASCADE, blank=True, null=True, verbose_name=_('ユーザー'))
+    description = models.TextField(_('備考'), blank=True)
+    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
+
+    class Meta:
+        db_table = 'carts'
+        ordering = ['-created_at']
+        verbose_name = _('カート')
+        verbose_name_plural = _('カート')
+
+    def __str__(self):
+        return '%s' % self.uuid
+
+
 class Reservation(UUIDModel):
-    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, verbose_name=_('ユーザー'))
+
+    class GenderChoice(Enum):
+        male = '男性'
+        female = '女性'
+
+        @classmethod
+        def choices(cls):
+            return [(c.name, c.value) for c in cls]
+
+    class AgeRangeChoice(Enum):
+        teens = '～10代'
+        twenties = '20代'
+        thirties = '30代'
+        forties = '40代'
+        fifties = '50代'
+        sixties = '60代～'
+
+        @classmethod
+        def choices(cls):
+            return [(c.name, c.value) for c in cls]
+
+    cart = models.ForeignKey('Cart', on_delete=models.PROTECT, verbose_name=_('カート'))
+    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('ユーザー'))
     item = models.ForeignKey('Item', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('アイテム'))
     size = models.ForeignKey('Size', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('サイズ'))
     type = models.ForeignKey('Type', on_delete=models.PROTECT, blank=True, null=True, verbose_name=_('タイプ'))
+    prefecture = models.ForeignKey('Prefecture', on_delete=models.PROTECT, verbose_name=_('都道府県'), blank=True, null=True)
     start_date = models.DateField(_('開始日'), blank=True, null=True)
     return_date = models.DateField(_('返却日'), blank=True, null=True)
     zip_code = models.CharField(_('郵便番号'), max_length=50, blank=True)
-    address = models.CharField(_('住所'), max_length=255, blank=True)
+    city = models.CharField(_('市区町村'), max_length=50, blank=True)
+    address = models.CharField(_('番地・建物名'), max_length=255, blank=True)
     address_name = models.CharField(_('氏名'), max_length=50, blank=True, null=True)
+    address_name_kana = models.CharField(_('フリガナ'), max_length=50, blank=True, null=True)
+    email = models.EmailField(_('email address'), blank=True, null=True)
+    gender = models.CharField(_('性別'), max_length=50, choices=GenderChoice.choices(), blank=True, null=True)
+    age_range = models.CharField(_('年齢層'), max_length=50, choices=AgeRangeChoice.choices(), blank=True, null=True)
     item_fee = models.IntegerField(_('小計価格'), blank=True, null=True)
     postage = models.IntegerField(_('送料'), blank=True, null=True)
     total_fee = models.IntegerField(_('合計価格'), blank=True, null=True)
@@ -287,7 +333,31 @@ class Reservation(UUIDModel):
         verbose_name_plural = _('予約')
 
     def __str__(self):
-        return '%s' % self.user
+        return '%s' % self.item
+
+
+class Coupon(UUIDModel):
+
+    def generate_coupon_code():
+        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+        return ''.join(random.choices(letters, k=10))
+
+    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT, verbose_name=_('ユーザー'))
+    coupon_code = models.CharField(_('クーポンコード'), max_length=50, default=generate_coupon_code, unique=True)
+    discount = models.IntegerField(_('割引額'))
+    status = models.SmallIntegerField(_('ステータス'), default=0)
+    description = models.TextField(_('備考'), blank=True)
+    created_at = models.DateTimeField(_('作成日時'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('更新日時'), auto_now=True)
+
+    class Meta:
+        db_table = 'coupons'
+        ordering = ['-created_at']
+        verbose_name = _('クーポン')
+        verbose_name_plural = _('クーポン')
+
+    def __str__(self):
+        return '%s' % self.coupon_code
 
 
 class Question(UUIDModel):
