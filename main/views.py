@@ -67,17 +67,14 @@ class SearchView(generic.ListView):
     def post(self, request):
         if request.user.is_authenticated:
             cart, _ = models.Cart.objects.get_or_create(user=request.user)
-            request.session['cart'] = str(cart.uuid)
         elif 'cart' in request.session and not request.user.is_authenticated:
             cart, _ = models.Cart.objects.get_or_create(uuid=request.session.get('cart'))
-            request.session['cart'] = str(cart.uuid)
         else:
             _uuid = str(uuid.uuid4())
             new_cart = models.Cart(uuid=_uuid)
             new_cart.save()
             cart = models.Cart.objects.get(uuid=_uuid)
-            request.session['cart'] = _uuid
-
+        request.session['cart'] = str(cart.uuid)
         reservation = models.Reservation(
             cart=cart,
             item=models.Item.objects.get(uuid=request.POST.get('item')),
@@ -99,16 +96,14 @@ class CartView(generic.ListView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             cart, _ = models.Cart.objects.get_or_create(user=self.request.user)
-            self.request.session['cart'] = str(cart.uuid)
         elif 'cart' in self.request.session and not self.request.user.is_authenticated:
             cart, _ = models.Cart.objects.get_or_create(uuid=self.request.session.get('cart'))
-            self.request.session['cart'] = str(cart.uuid)
         else:
             _uuid = str(uuid.uuid4())
             new_cart = models.Cart(uuid=_uuid)
             new_cart.save()
             cart = models.Cart.objects.get(uuid=_uuid)
-            self.request.session['cart'] = _uuid
+        self.request.session['cart'] = str(cart.uuid)
         return models.Reservation.objects.filter(cart=cart, status=1).order_by('-created_at')
 
     def post(self, request):
