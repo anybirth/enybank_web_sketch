@@ -5,4 +5,8 @@ __pycache__/
 local_settings.py
 db.sqlite3
 /enybank_web/media/*
-/enybank_web/static/admin/
+/enybank_web/static/
+!/enybank_web/static/css/
+!/enybank_web/static/fonts/
+!/enybank_web/static/img/
+!/enybank_web/static/js/
