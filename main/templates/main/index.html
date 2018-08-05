@@ -669,7 +669,8 @@ background: rgba(255, 255, 255, 1.0);">
         <div class="serchcase2">
             <style>
             .selected {
-              border: 4px solid #555 !important;
+              border: 3px solid #1779ba !important;
+              box-shadow: 0 0 8px gray !important;
             }
             </style>
             <script>
@@ -710,7 +711,7 @@ background: rgba(255, 255, 255, 1.0);">
 
                 if (start_date && return_date && color_category && type) {
                   var _href = $(this).attr("href");
-                  $(this).attr("href", _href + '?start_date=' + start_date + '&return_date=' + return_date + '&color_category=' + color_category + '&type=' + type);
+                  $(this).attr("href", _href + '?start_date=' + start_date + '&return_date=' + return_date + '&color_category=' + color_category + '&type=' + type + '&num=0');
                 } else {
                   alert('全ての項目を選択してください');
                   return false;
