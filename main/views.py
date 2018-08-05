@@ -26,9 +26,10 @@ class IndexView(generic.TemplateView):
         return context
 
 
-class SearchView(generic.ListView):
-    model = models.Item
-    context_object_name = 'items'
+# class SearchView(generic.ListView):
+class SearchView(generic.TemplateView):
+    # model = models.Item
+    # context_object_name = 'items'
     template_name = 'main/search.html'
 
     def fee_calculator(self):
@@ -62,14 +63,29 @@ class SearchView(generic.ListView):
 
         return round(fee, -1)
 
-    def get_queryset(self):
-        return models.Item.objects.filter(
-            color_category=self.request.GET.get('color_category'),
-            type=self.request.GET.get('type')
-        )
+    # def get_queryset(self):
+    #     return models.Item.objects.filter(
+    #         color_category=self.request.GET.get('color_category'),
+    #         type=self.request.GET.get('type')
+    #     )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if all(x in self.request.GET for x in ('start_date', 'return_date', 'color_category', 'type', 'num')):
+            try:
+                context['item'] = models.Item.objects.filter(
+                    color_category=self.request.GET.get('color_category'),
+                    type=self.request.GET.get('type')
+                ).annotate(Count('reservation')).order_by('-reservation__count')[int(self.request.GET.get('num'))]
+            except IndexError:
+                context['item'] = None
+            try:
+                context['next_item'] = models.Item.objects.filter(
+                    color_category=self.request.GET.get('color_category'),
+                    type=self.request.GET.get('type')
+                ).annotate(Count('reservation')).order_by('-reservation__count')[int(self.request.GET.get('num')) + 1]
+            except IndexError:
+                context['next_item'] = None
         context['fee'] = self.fee_calculator()
         return context
 
