@@ -683,14 +683,6 @@ background: rgba(255, 255, 255, 1.0);">
               var type = '';
               var target = '';
 
-              $('[name=select-box]').change(function() {
-                selectStatus = $('[name=select-box]').val();
-                var target = '.display-' + selectStatus + '.display-' + buttonStatus;
-                $('.display').addClass('display-none');
-                $(target).removeClass('display-none');
-                return false;
-              });
-
               $('.color_category').on('click', function() {
                 color_category = $(this).attr("id");
                 var target = '#' + color_category;
@@ -708,6 +700,8 @@ background: rgba(255, 255, 255, 1.0);">
               });
 
               $('#search').on('click', function() {
+                var start_date = $('#start_date').val();
+                var return_date = $('#return_date').val();
 
                 if (start_date && return_date && color_category && type) {
                   var _href = $(this).attr("href");
@@ -724,16 +718,19 @@ background: rgba(255, 255, 255, 1.0);">
                 <div class="group2">
                     <img anima-src="{% static 'img/home-rectangle-8@2x.png' %}" class="rectangle8" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                     <img anima-src="{% static 'img/home-icon125550256@2x.png' %}" class="icon125550256" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
-                    <div class="u53d7u3051u53d6u308au65e5">
+                    <div class="u53d7u3051u53d6u308au65e5 search-label">
                         受け取り日
                     </div>
-                </div>
-                <div class="group3">
+                    <input id='start_date' class="date-input rectangle8" style="border-style: none;" type="date" name="calendar">
+                </div><div class="group3">
                     <img anima-src="{% static 'img/home-rectangle-8 1@2x.png' %}" class="rectangle8" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
                     <img anima-src="{% static 'img/home-icon125550256 1@2x.png' %}" class="icon125550256" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
-                    <div class="u8fd4u5374u65e5">
-                        返却日
-                    </div>
+                    <lavel>
+                      <div class="u8fd4u5374u65e5 search-label">
+                          返却日
+                      </div>
+                      <input id='return_date' class="date-input rectangle8" style="border-style: none;" type="date" name="calendar">
+                    </lavel>
                 </div>
                 <div class="group6">
                     <div class="rectangle9">

@@ -165,6 +165,13 @@ class RentalConfirmView(generic.DetailView):
         obj = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
         return obj
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        reservation = models.Reservation.objects.get(uuid=self.request.session.get('reservation'))
+        delta = reservation.return_date - reservation.start_date
+        context['days'] = delta.days + 1
+        return context
+
 
 class RentalCheckoutView(generic.View):
 

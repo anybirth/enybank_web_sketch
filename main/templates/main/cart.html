@@ -3,9 +3,716 @@
 {% load static %}
 {% block content %}
 
-<p>cart</p>
+{% with reservations|first as reservation %}
+<div style="margin: 0;
+background: rgba(255, 255, 255, 1.0);">
+    <input id="anPageName" name="page" type="hidden" value="confirmationitem"/>
+    <div class="confirmationitem">
+        <div class="rectangle15">
+        </div>
+        <div class="rectangle151">
+        </div>
+        <div class="rectangle152">
+        </div>
+        <div class="u9060u65b9u5730u57dfu3078u304au5c4au3051u5e0cu671bu306eu65b9">
+            遠方地域へお届け希望の方
+        </div>
+        <form type="get" action="">
+          <input type="checkbox" id="tohoku" name="feature"
+           value="tohoku" class ="rectangle12"/>
+          <label for="tohoku">
+            <div class="u6771u5317u30fbu56dbu56fdu30fbu4e5du5ddeu30fbu5c71u53e3u770c">
+                東北・四国・九州・山口県
+            </div>
+          </label>
+          <input type="checkbox" id="dosanko" name="feature"
+           value="dosanko" class ="rectangle121"/>
+          <label for="dosanko">
+            <div class="u5317u6d77u9053">
+                北海道
+            </div>
+          </label>
+        <div class="u3054u5e0cu671bu306eu65e5u7a0b">
+            ご希望の日程
+        </div>
+        <div class="rectangle153">
+        </div>
+        <div class="u8fd4u5374u65e5u6642">
+            返却日時
+        </div>
+        <div class="rectangle154">
+        </div>
+        <div class="u5b89u5168u4fddu969c">
+            安全保障
+        </div>
+        <div class="rectangle155">
+        </div>
+        <div class="u3054u4e00u7dd2u306b">
+            ご一緒に
+        </div>
+        <div class="u304bu3089">
+            から
+        </div>
+        <div class="u307eu3067">
+            まで
+        </div>
+        <div class="group8">
+            <!-- <div class="rectangle16">
+            </div>
+            <div class="a2018u5e749u6708">
+                2018年9月
+            </div> -->
+            <select class="rectangle16" size="1" name="year-and-month" id="year-and-month">
+              <option value="9月" selected>2018年9月</option>
+              <option value="10月">2018年10月</option>
+              <option value="11月">2018年11月</option>
+              <option value="12月">2018年12月</option>
+            </select>
+            <img anima-src="{% static 'img/confirmationitem-combined-shape@2x.png' %}" class="combinedshape3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <!-- <div class="group81">
+            <div class="group6">
+                <div class="group7">
+                    <div class="rectangle16">
+                    </div>
+                    <div class="a2018u5e749u6708">
+                        2018年9月
+                    </div>
+                </div>
+            </div>
+            <img anima-src="{% static 'img/confirmationitem-combined-shape 1@2x.png' %}" class="combinedshape3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div> -->
+        <div class="group82">
+            <!-- <div class="rectangle16">
+            </div>
+            <div class="a10u65e5">
+                10日
+            </div> -->
+            <select class="rectangle16" size="1" name="day-start" id="day-start">
+              <option value="01">01日</option>
+              <option value="02">02日</option>
+              <option value="03">03日</option>
+              <option value="04">04日</option>
+              <option value="05">05日</option>
+              <option value="06">06日</option>
+              <option value="07">07日</option>
+              <option value="08">08日</option>
+              <option value="09">09日</option>
+              <option value="10" selected>10日</option>
+              <option value="11">11日</option>
+              <option value="12">12日</option>
+              <option value="13">13日</option>
+              <option value="14">14日</option>
+              <option value="15">15日</option>
+              <option value="16">16日</option>
+              <option value="17">17日</option>
+              <option value="18">18日</option>
+              <option value="19">19日</option>
+              <option value="20">20日</option>
+              <option value="21">21日</option>
+              <option value="22">22日</option>
+              <option value="23">23日</option>
+              <option value="24">24日</option>
+              <option value="25">25日</option>
+              <option value="26">26日</option>
+              <option value="27">27日</option>
+              <option value="28">28日</option>
+              <option value="29">29日</option>
+              <option value="30">30日</option>
+              <option value="31">31日</option>
+            </select>
+            <img anima-src="{% static 'img/confirmationitem-combined-shape@2x.png' %}" class="combinedshape3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <div class="group83">
+            <!-- <div class="rectangle16">
+            </div>
+            <div class="a14u65e51">
+                14日
+            </div> -->
+            <select class="rectangle16" size="1" name="day-end" id="day-end">
+              <option value="01">01日</option>
+              <option value="02">02日</option>
+              <option value="03">03日</option>
+              <option value="04">04日</option>
+              <option value="05">05日</option>
+              <option value="06">06日</option>
+              <option value="07">07日</option>
+              <option value="08">08日</option>
+              <option value="09">09日</option>
+              <option value="10">10日</option>
+              <option value="11">11日</option>
+              <option value="12">12日</option>
+              <option value="13">13日</option>
+              <option value="14" selected>14日</option>
+              <option value="15">15日</option>
+              <option value="16">16日</option>
+              <option value="17">17日</option>
+              <option value="18">18日</option>
+              <option value="19">19日</option>
+              <option value="20">20日</option>
+              <option value="21">21日</option>
+              <option value="22">22日</option>
+              <option value="23">23日</option>
+              <option value="24">24日</option>
+              <option value="25">25日</option>
+              <option value="26">26日</option>
+              <option value="27">27日</option>
+              <option value="28">28日</option>
+              <option value="29">29日</option>
+              <option value="30">30日</option>
+              <option value="31">31日</option>
+            </select>
+            <img anima-src="{% static 'img/confirmationitem-combined-shape 3@2x.png' %}" class="combinedshape3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <div class="u65c5u884cu524du5f8cu306fu4f59u88d5u3092u304au6301u3061u306bu306au308bu306eu304cu30aau30b9u30b9u30e1">
+            旅行前後は余裕をお持ちになるのがオススメです！
+        </div>
+        <a href="https://eny-bank.com">
+            <img anima-src="{% static 'img/confirmationitem-rectangle-17@2x.png' %}" class="rectangle17" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </a>
+        <a href="https://eny-bank.com">
+            <div class="u3054u6ce8u6587u624bu7d9au304du306bu9032u3080u2192">
+              <p class="text-center"><button type="submit" name="reservation" value="{{ reservation.uuid }}">ご注文手続きに進む→</button></p>
+            </div>
+        </a>
+        <a href="https://eny-bank.com">
+            <div class="group13">
+                <img anima-src="{% static 'img/confirmationitem-rectangle-17 1@2x.png' %}" class="rectangle171" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <a href="https://eny-bank.com">
+                    <div class="u2190u524du306eu30dau30fcu30b8u306bu623bu308b">
+                        ←前のページに戻る
+                    </div>
+                </a>
+            </div>
+        </a>
+        <div class="group21">
+            <img anima-src="{% static 'img/confirmationitem-rectangle-17 2@2x.png' %}" class="rectangle171" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="u5b89u5168u4fddu969cu30d1u30c3u30afu52a0u5165">
+                安全保障パック加入
+            </div>
+        </div>
+        <div class="group12">
+            <div class="u5408u8a08u91d1u984d">
+                合計金額
+            </div>
+            <div class="a2453280u5186">
+                ¥3280円
+            </div>
+        </div>
+        <div class="rectangle4">
+        </div>
+        <div class="u30d5u30c3u30bfu30fc">
+            フッター
+        </div>
+        <!-- <div class="a2018u5e749u670814u65e517u6642">
+            2018年9月14日　17時
+        </div> -->
+        <!-- <div class="a2018u5e749u670814u65e517u6642" id="fo"></div>
+        <script>
+            var div = document.getElementById('fo');
+            var nex1 = Number(daye) + 2;
+            var old1 = Number(days) - 2;
+            //新規にp要素を出力
+            div.innerHTML = "2018年" +month + days + "日~" + nex1 + "日";
+        </script> -->
+        <div class="u4e0au8a18u3067u6307u5b9au306eu6642u523bu307eu3067u306bu3001u96c6u8377u3092u3054u4f9du983cu304fu3060">
+            上記で指定の時刻までに、集荷をご依頼ください。
+            <br/>
+            集荷依頼は、レンタル予約完了後にマイページより行えます。
+        </div>
+        <div class="group19">
+            <img anima-src="{% static 'img/confirmationitem-rectangle-19@2x.png' %}" class="rectangle19" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u304cu3054u81eau5b85u306bu5230u7740">
+            スーツケースがご自宅に到着
+        </div>
+        <script>
+          // select要素を取得
+          var year_and_month = $('[name=year-and-month]').val(); ;
+          $('[name=select-box]').change(function() {
+              year_and_month = $('[name=select-box]').val();
+              return false;
+          });
+          var day_start = $('[name=day-start]').val(); ;
+          $('[name=select-box]').change(function() {
+              day_start = $('[name=select-box]').val();
+              return false;
+          });
 
-{% for reservation in reservations %}
+          // 選択状態の項目の値を取得
+          var month = element.value ;
+
+          // select要素を取得
+          var element2 = document.getElementById( "day-start" ) ;
+
+          // 選択状態の項目の値を取得
+          var days = element2.value ;
+
+          // select要素を取得
+          var element3 = document.getElementById( "day-end" ) ;
+
+          // 選択状態の項目の値を取得
+          var daye = element3.value ;
+
+        </script>
+        <!-- <div class="a9u670810u65e5">
+            9月10日
+        </div> -->
+        <div class="a9u670810u65e5" id="monthday"></div>
+          <script>
+              var div = document.getElementById('monthday');
+
+              //新規にp要素を出力
+              div.innerHTML = month + days + "日";
+          </script>
+        <!-- <div class="a11u65e5">
+            11日
+        </div> -->
+        <div class="a11u65e5" id="day"></div>
+        <script>
+            var div = document.getElementById('day');
+
+            //新規にp要素を出力
+            var nextday = Number(days) + 1;
+            div.innerHTML = nextday + "日";
+        </script>
+        <!-- <div class="a14u65e5">
+            14日
+        </div> -->
+        <div class="a14u65e5" id="daye"></div>
+        <script>
+            var div = document.getElementById('daye');
+
+            //新規にp要素を出力
+            div.innerHTML = daye + "日";
+        </script>
+        <div class="u96c6u8377u30b9u30bfu30c3u30d5u306bu8fd4u5374">
+            集荷スタッフに返却
+        </div>
+        <div class="calender">
+            <img anima-src="{% static 'img/confirmationitem-line@2x.png' %}" class="line" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <img anima-src="{% static 'img/confirmationitem-line 1@2x.png' %}" class="line1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <img anima-src="{% static 'img/confirmationitem-line-2@2x.png' %}" class="line2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <img anima-src="{% static 'img/confirmationitem-line-2 1@2x.png' %}" class="line21" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <img anima-src="{% static 'img/confirmationitem-line-2 2@2x.png' %}" class="line22" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="group18">
+                <div class="group17">
+                    <div class="group9">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 2@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 3@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group91">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 2@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 3@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group92">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 16@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 5@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                </div>
+                <div class="group171">
+                    <div class="group9">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 20@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 9@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group91">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 20@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 9@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group92">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 10@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 11@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                </div>
+            </div>
+            <div class="group181">
+                <div class="group17">
+                    <div class="group9">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 2@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 3@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group91">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 2@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 3@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group92">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 16@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 5@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                </div>
+                <div class="group171">
+                    <div class="group9">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 20@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 9@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group91">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 20@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 9@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                    <div class="group92">
+                        <img anima-src="{% static 'img/confirmationitem-line-3 10@2x.png' %}" class="line3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                        <img anima-src="{% static 'img/confirmationitem-line-3 11@2x.png' %}" class="line31" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-combined-shape 4@2x.png' %}" class="combinedshape" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="u30b9u30b1u30b8u30e5u30fcu30eb">
+            スケジュール
+        </div>
+        <div class="u6d77u5916u65c5u884cu306au3069u3067u306fu3001u7a7au6e2fu30b9u30bfu30c3u30d5u306eu6271u3044u306eu60aa">
+            海外旅行などでは、空港スタッフの扱いの悪さや、内容物の液体漏れなど、予期せぬ出来事により、多くの頻度で故障や汚れることがあります。
+        </div>
+        <div class="group2">
+            <img anima-src="{% static 'img/confirmationitem-rectangle-21@2x.png' %}" class="rectangle21" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <img anima-src="{% static 'img/confirmationitem-u30b9u30afu30eau30fcu30f3u30b7u30e7u30c3u30c8-2018-08-01-150450@2x.png' %}" class="u30b9u30afu30eau30fcu30f3u30b7u30e7u30c3u30c820180801150450" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="u91cdu3044u8377u7269u3084u3001u4e0au306bu5ea7u308bu3053u3068u306bu3088u308bu8ca0u8377u3067u306eu6545">
+                重い荷物や、上に座ることによる負荷での故障
+            </div>
+        </div>
+        <div class="rectangle22">
+        </div>
+        <div class="rectangle221">
+        </div>
+        <div class="rectangle222">
+        </div>
+        <div class="group3">
+            <img anima-src="{% static 'img/confirmationitem-rectangle-21@2x.png' %}" class="rectangle21" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="u7a7au6e2fu30b9u30bfu30c3u30d5u304cu6295u3052u305fu308au3059u308bu3053u3068u3067u306eu7834u640d">
+                空港スタッフが投げたりすることでの破損
+            </div>
+            <img anima-src="{% static 'img/confirmationitem-u30b9u30afu30eau30fcu30f3u30b7u30e7u30c3u30c8-2018-08-01-151825@2x.png' %}" class="u30b9u30afu30eau30fcu30f3u30b7u30e7u30c3u30c820180801151825" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <div class="u305du3053u3067u2026u2026u306au3069u5168u3066u306bu5bfeu5fdcu3057u305fu301du5b89u5168u4fddu969c">
+            そこで……
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            など全てに対応した〝安全保障パック〟がオススメ！
+        </div>
+        <div class="group23">
+            <img anima-src="{% static 'img/confirmationitem-group-22.png' %}" class="group22" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <img anima-src="{% static 'img/confirmationitem-line-4@2x.png' %}" class="line4" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <div class="u300eu6c5au308cu300fu300eu6545u969cu300fu300eu76d7u96e3u300f">
+            『汚れ』『故障』『盗難』
+        </div>
+        <a href="https://eny-bank.com" target="_blank">
+            <div class="group24">
+                <div class="u8fd4u5374uff08u96c6u8377u4f9du983cuff09u306eu65b9u6cd5u306fu3053u3061u3089">
+                    返却（集荷依頼）の方法はこちら
+                </div>
+                <div class="group9">
+                    <img anima-src="{% static 'img/confirmationitem-oval-7@2x.png' %}" class="oval7" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    <div class="uff1f">
+                        ？
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="item">
+            <div class="group4">
+                <img anima-src="{% static 'img/confirmationitem-rectangle-7@2x.png' %}" class="rectangle7" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <div class="amazonu58f2u308cu7b4bu30e9u30f3u30adu30f3u30b0uff11u4f4du306eu4ebau6c17u5546">
+                    Amazon売れ筋ランキング１位の人気商品！
+                    <br/>
+                    軽量ながらも壊れにくい特殊な素材を使用
+                </div>
+                <div class="rectangle8">
+                </div>
+                <img anima-src="{% static 'img/confirmationitem-rectangle-12@2x.png' %}" class="rectangle122" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <div class="group15">
+                    <img anima-src="{% static 'img/confirmationitem-triangle-2@2x.png' %}" class="triangle2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                    <img anima-src="{% static 'img/confirmationitem-triangle-2 1@2x.png' %}" class="triangle21" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                </div>
+                <div class="a1">
+                    1
+                </div>
+                <img class="u3059u30fcu306401" src="{% with reservation.item.item_image_set.all|first as item_image %}{{ item_image.image.url }}{% endwith %}" style="object-fit: cover;"/>
+                <!-- <img anima-src="{% static 'img/confirmationitem-u3059u30fcu306401@2x.png' %}" class="u3059u30fcu306401" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/> -->
+                <!-- <img anima-src="{% static 'img/confirmationitem-combined-shape 5@2x.png' %}" class="combinedshape3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/> -->
+                <div class="remowajetnsj32l">
+                    <p style="font-size:14px;">{{ reservation.item.series }}
+                </div>
+                <div class="rectangle1211">
+                </div>
+                <div class="rectangle9">
+                </div>
+                <div class="u9001u6599u7121u6599">
+                    送料無料
+                </div>
+                <div class="rectangle91">
+                </div>
+                <div class="u65b0u54c1">
+                    新品
+                </div>
+                <div class="u500bu6570">
+                    個数
+                </div>
+                <div class="stackedgroup">
+                    <div class="rectangle92">
+                    </div>
+                </div>
+                <div class="u5373u65e5u767au9001">
+                    即日発送
+                </div>
+            </div>
+            <input type="checkbox" name="riyu" value="1" class="icondonefilled">
+            <!-- <div class="icondonefilled">
+                <img anima-src="{% static 'img/confirmationitem-icon--done--filled@2x.png' %}" class="icondonefilled1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </div> -->
+        </div>
+        <div class="u30abu30fcu30c8u306bu8ffdu52a0u3057u305fu5546u54c1u3092u3054u78bau8a8du306eu4e0au3001u300eu500bu6570">
+            カートに追加した商品をご確認の上、『個数』『発送先地域』『受け取り/返却日』『料金』を選択してください。
+        </div>
+        <div class="u30abu30fcu30c8u306eu78bau8a8d">
+            カートの確認
+        </div>
+        <div class="header">
+            <img anima-src="{% static 'img/confirmationitem-rectangle-2.png' %}" class="rectangle2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="group">
+                <div class="rectangle6">
+                </div>
+                <div class="rectangle61">
+                </div>
+                <div class="rectangle62">
+                </div>
+            </div>
+            <div class="group34">
+                <img anima-src="{% static 'img/confirmationitem-rectangle-24@2x.png' %}" class="rectangle24" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationitem-line-12@2x.png' %}" class="line12" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationitem-oval-11 1@2x.png' %}" class="oval11" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationitem-oval-11 1@2x.png' %}" class="oval111" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationitem-line-6@2x.png' %}" class="line6" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </div>
+            <div class="group33">
+                <img anima-src="{% static 'img/confirmationitem-rectangle-23@2x.png' %}" class="rectangle23" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationitem-oval-10@2x.png' %}" class="oval10" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </div>
+            <div class="stackedgroup">
+                <div class="enybank">
+                    EnyBank
+                </div>
+            </div>
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-bar@2x.png' %}" class="bar" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="rectangle46">
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-combined-shape 7@2x.png' %}" class="combinedshape1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <img anima-src="{% static 'img/confirmationitem-oval-12@2x.png' %}" class="oval12" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="a80off">
+            80%
+            <br/>
+            Off
+        </div>
+        <div class="a200u5186">
+            200円
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-line-13 1@2x.png' %}" class="line13" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u30d9u30ebu30c8">
+            スーツケース　ベルト
+        </div>
+        <div class="rectangle461">
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-combined-shape 7@2x.png' %}" class="combinedshape2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <img anima-src="{% static 'img/confirmationitem-oval-12 1@2x.png' %}" class="oval121" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="a80off1">
+            80%
+            <br/>
+            Off
+        </div>
+        <div class="a200u51861">
+            200円
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-line-13 1@2x.png' %}" class="line131" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u30abu30d0u30fc">
+            スーツケース　カバー
+        </div>
+        <img anima-src="{% static 'img/confirmationitem-belt1@2x.png' %}" class="belt1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <img anima-src="{% static 'img/confirmationitem-belt3@2x.png' %}" class="belt3" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="group10">
+            <img anima-src="{% static 'img/confirmationitem-pricenow@2x.png' %}" class="pricenow" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="rectangle49">
+            </div>
+            <!-- <div class="a9u670810u65e514u65e5">
+                9月10日~14日
+            </div> -->
+            <div class="a9u670810u65e514u65e5" id="first"></div>
+            <script>
+                var div = document.getElementById('first');
+
+                //新規にp要素を出力
+                div.innerHTML = month + days + "日~" + daye + "日";
+            </script>
+            <div class="a4u65e5u9593">
+                4日間
+            </div>
+            <div class="a800">
+                800
+            </div>
+        </div>
+        <div class="group14">
+            <img anima-src="{% static 'img/confirmationitem-price 1@2x.png' %}" class="price" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="rectangle49">
+            </div>
+            <!-- <div class="a9u670810u65e515u65e5">
+                9月10日~15日
+            </div> -->
+            <div class="a9u670810u65e515u65e5" id="second"></div>
+            <script>
+                var div = document.getElementById('second');
+                var nex1 = Number(daye) + 1;
+                //新規にp要素を出力
+                div.innerHTML = month + days + "日~" + nex1 + "日";
+            </script>
+            <div class="a5u65e5u9593">
+                5日間
+            </div>
+            <div class="a750">
+                750
+            </div>
+        </div>
+        <div class="group16">
+            <img anima-src="{% static 'img/confirmationitem-pricepopular@2x.png' %}" class="pricepopular" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="rectangle49">
+            </div>
+            <!-- <div class="a9u67089u65e515u65e5">
+                9月9日~15日
+            </div> -->
+            <div class="a9u67089u65e515u65e5" id="third"></div>
+            <script>
+                var div = document.getElementById('third');
+                var nex1 = Number(daye) + 1;
+                var old1 = Number(days) - 1;
+                //新規にp要素を出力
+                div.innerHTML = month + old1 + "日~" + nex1 + "日";
+            </script>
+            <div class="a6u65e5u9593">
+                6日間
+            </div>
+            <div class="a700">
+                700
+            </div>
+        </div>
+        <div class="group20">
+            <div class="group11">
+                <img anima-src="{% static 'img/confirmationitem-price 1@2x.png' %}" class="price" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <div class="rectangle49">
+                </div>
+                <!-- <div class="a9u67088u65e516u65e5">
+                    9月8日~16日
+                </div> -->
+                <div class="a9u67088u65e516u65e5" id="fo"></div>
+                <script>
+                    var div = document.getElementById('fo');
+                    var nex1 = Number(daye) + 2;
+                    var old1 = Number(days) - 2;
+                    //新規にp要素を出力
+                    div.innerHTML = month + old1 + "日~" + nex1 + "日";
+                </script>
+                <div class="a8u65e5u9593">
+                    8日間
+                </div>
+                <div class="a600">
+                    600
+                </div>
+            </div>
+        </div>
+        <a href="http://eny-bank.com">
+            <div class="group5">
+                <img anima-src="{% static 'img/confirmationitem-rectangle-2 1@2x.png' %}" class="rectangle2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationitem-triangle-5@2x.png' %}" class="triangle5" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <div class="rectangle">
+                </div>
+                <div class="u3082u3063u3068u898bu308b">
+                    もっと
+                    <br/>
+                    見る
+                </div>
+            </div>
+        </a>
+    </div>
+    <!-- Scripts -->
+    <script>
+        anima_isHidden = function(e) {
+            if (!(e instanceof HTMLElement)) return !1;
+            if (getComputedStyle(e).display == "none") return !0; else if (e.parentNode && anima_isHidden(e.parentNode)) return !0;
+            return !1;
+        };
+        anima_loadAsyncSrcForTag = function(tag) {
+            var elements = document.getElementsByTagName(tag);
+            var toLoad = [];
+            for (var i = 0; i < elements.length; i++) {
+                var e = elements[i];
+                var src = e.getAttribute("src");
+                var loaded = (src != undefined && src.length > 0 && src != 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+                if (loaded) continue;
+                var asyncSrc = e.getAttribute("anima-src");
+                if (asyncSrc == undefined || asyncSrc.length == 0) continue;
+                if (anima_isHidden(e)) continue;
+                toLoad.push(e);
+            }
+            toLoad.sort(function(a, b) {
+                return anima_getTop(a) - anima_getTop(b);
+            });
+            for (var i = 0; i < toLoad.length; i++) {
+                var e = toLoad[i];
+                var asyncSrc = e.getAttribute("anima-src");
+                e.setAttribute("src", asyncSrc);
+            }
+        };
+        anima_pauseHiddenVideos = function(tag) {
+            var elements = document.getElementsByTagName("video");
+            for (var i = 0; i < elements.length; i++) {
+                var e = elements[i];
+                var isPlaying = !!(e.currentTime > 0 && !e.paused && !e.ended && e.readyState > 2);
+                var isHidden = anima_isHidden(e);
+                if (!isPlaying && !isHidden && e.getAttribute("autoplay") == "autoplay") {
+                    e.play();
+                } else if (isPlaying && isHidden) {
+                    e.pause();
+                }
+            }
+        };
+        anima_loadAsyncSrc = function(tag) {
+            anima_loadAsyncSrcForTag("img");
+            anima_loadAsyncSrcForTag("iframe");
+            anima_loadAsyncSrcForTag("video");
+            anima_pauseHiddenVideos();
+        };
+        var anima_getTop = function(e) {
+            var top = 0;
+            do {
+                top += e.offsetTop || 0;
+                e = e.offsetParent;
+            } while (e);
+            return top;
+        };
+        anima_loadAsyncSrc();
+        anima_old_onResize = window.onresize;
+        anima_new_onResize = undefined;
+        anima_updateOnResize = function() {
+            if (anima_new_onResize == undefined || window.onresize != anima_new_onResize) {
+                anima_new_onResize = function(x) {
+                    if (anima_old_onResize != undefined) anima_old_onResize(x);
+                    anima_loadAsyncSrc();
+                };
+                window.onresize = anima_new_onResize;
+                setTimeout(function() {
+                    anima_updateOnResize();
+                }, 3000);
+            }
+        };
+        anima_updateOnResize();
+        setTimeout(function() {
+            anima_loadAsyncSrc();
+        }, 200);
+    </script>
+    <!-- End of Scripts -->
+</div>
+
+<!-- {% for reservation in reservations %}
 <p>{{ reservation }}</p>
 
 <form action="" method="post">
@@ -13,7 +720,7 @@
   <p class="text-center"><button type="submit" name="reservation" value="{{ reservation.uuid }}" class="button">reserve→</button></p>
 </form>
 {% endfor %}
-
-<p class="text-center"><a href="{% url 'main:index' %}" class="button secondary">←back to home</a></p>
+{% endwith %}
+<p class="text-center"><a href="{% url 'main:index' %}" class="button secondary">←back to home</a></p> -->
 
 {% endblock %}

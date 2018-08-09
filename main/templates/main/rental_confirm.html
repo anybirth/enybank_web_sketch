@@ -3,30 +3,256 @@
 {% load static %}
 {% block content %}
 
-<p>rental confirm</p>
+<div style="margin: 0;
+background: rgba(255, 255, 255, 1.0);">
+    <input id="anPageName" name="page" type="hidden" value="confirmationinfo"/>
+    <div class="confirmationinfo">
+        <img anima-src="{% static 'img/confirmationinfo-var2@2x.png' %}" class="var2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="rectangle4">
+        </div>
+        <div class="u30d5u30c3u30bfu30fc">
+            フッター
+        </div>
+        <div class="u3054u6ce8u6587u60c5u5831u306eu78bau8a8d">
+            ご注文情報の確認
+        </div>
+        <div class="u3054u6ce8u6587u60c5u5831u306eu78bau8a8d1">
+            ご注文情報の確認
+        </div>
+        <div class="rectangle15">
+        </div>
+        <!-- <a href="http://eny-bank.com">
+            <img anima-src="{% static 'img/confirmationinfo-rectangle-17@2x.png' %}" class="rectangle17" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </a> -->
+        <a href="http://eny-bank.com">
+            <div class="u304au652fu6255u3044u3078u2192">
 
-<p>{{ reservation }}</p>
-
-{% for item_image in reservation.item.item_image_set.all %}
-<img style="width:250px;" src="{{ item_image.image.url }}">
-{% endfor %}
-
-<form action="{% url 'main:rental_checkout' %}" method="POST">
-  {% csrf_token %}
-  <p class="text-center">
-    <script
-      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="pk_test_Ht65fJK5QQKbqmVcD0XLK52t"
-      data-amount="{{ reservation.total_fee }}"
-      data-name="支払い"
-      data-description="レンタル料の支払いです"
-      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-      data-locale="auto"
-      data-currency="jpy">
+            <form action="{% url 'main:rental_checkout' %}" method="POST">
+              {% csrf_token %}
+              <p class="text-center">
+                <script
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="pk_test_Ht65fJK5QQKbqmVcD0XLK52t"
+                  data-amount="{{ reservation.total_fee }}"
+                  data-name="支払い"
+                  data-description="レンタル料の支払いです"
+                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                  data-locale="auto"
+                  data-currency="jpy">
+                </script>
+              </p>
+            </form>
+            </div>
+        </a>
+        <a href="http://eny-bank.com">
+            <img anima-src="{% static 'img/confirmationinfo-rectangle-17 1@2x.png' %}" class="rectangle171" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </a>
+        <a href="{% url 'main:cart' %}">
+            <div class="u2190u524du306eu30dau30fcu30b8u306bu623bu308b">
+                ←前のページに戻る
+            </div>
+        </a>
+        <div class="u4e0bu8a18u306eu5185u5bb9u3092u3054u78bau8a8du5f8cu3001u5229u7528u898fu7d04u306bu3054u540cu610fu306e">
+            下記の内容をご確認後、利用規約にご同意の上で、最後のお支払いにお進みください。
+        </div>
+        <div class="rectangle151">
+        </div>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u60c5u5831">
+            スーツケース情報
+        </div>
+        <div class="rectangle152">
+        </div>
+        <div class="u304au5ba2u69d8u60c5u5831">
+            お客様情報
+        </div>
+        <div class="rectangle153">
+        </div>
+        <div class="u304au652fu6255u3044u60c5u5831">
+            お支払い情報
+        </div>
+        <div class="rectangle154">
+        </div>
+        <div class="u30b5u30fcu30d3u30b9u5229u7528u898fu7d04">
+            サービス利用規約
+        </div>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u306eu5230u7740u65e5u6642uff1a2018u5e749u6708">
+            スーツケースの到着日時：　{{ reservation.start_date }}
+        </div>
+        <div class="u304au540du524duff1au5c71u7530u592au90ceu30d5u30eau30acu30cauff1au30e4u30deu30c0">
+            お名前：　{{ reservation.address_name }}
+            <br/>
+            フリガナ：　{{ reservation.address_name_kana }}
+            <br/>
+            郵便番号：　{{ reservation.zip_code }}
+            <br/>
+            住所：　{{ reservation.city }}{{ reservation.address }}
+            <br/>
+            メール：　{{ reservation.email }}
+        </div>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u30ecu30f3u30bfu30ebu6599u91d1uff084u65e5u9593uff09uff1a">
+            スーツケース レンタル料金（{{ days }}日間）：　{{ reservation.total_fee|add:-600 }}円
+            <br/>
+            安心保障パック：　300円
+            <br/>
+            付属品（スーツケース ベルト）：　300円
+            <br/>
+            <br/>
+            合計金額：　{{ reservation.total_fee }}円
+            <!-- <br/>
+            （消費税8%：　310円） -->
+            <!-- <br/>
+            税込後小計：　4190円 -->
+        </div>
+        <div class="u30b9u30fcu30c4u30b1u30fcu30b9u306eu8fd4u5374u671fu9650uff1a2018u5e749u6708">
+            スーツケースの返却期限：　{{ reservation.return_date }}
+        </div>
+        <div class="u5b89u5fc3u4fddu969cu30d1u30c3u30afuff1au52a0u5165">
+            安心保障パック：　加入
+        </div>
+        <div class="u4ed8u5c5eu54c1uff1au542bu3080">
+            付属品：　含む
+        </div>
+        <img anima-src="{% static 'img/confirmationinfo-line-5@2x.png' %}" class="line5" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <div class="group6">
+            <div class="rectangle23">
+            </div>
+            <div class="u30b5u30fcu30d3u30b9u5229u7528u898fu7d04u672cu5951u7d04u306fhogehog">
+                サービス利用規約
+                <br/>
+                本契約は…
+            </div>
+            <img anima-src="{% static 'img/confirmationinfo-combined-shape@2x.png' %}" class="combinedshape1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        </div>
+        <div class="group5">
+            <img anima-src="{% static 'img/confirmationinfo-rectangle-12@2x.png' %}" class="rectangle12" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="u4e0au8a18u3001u30b5u30fcu30d3u30b9u5229u7528u898fu7d04u306bu540cu610fu3057u307eu3059">
+                上記、サービス利用規約に同意します
+            </div>
+            <input type="checkbox" name="riyu" value="1" class="rectangle121">
+            <!-- <div class="rectangle121">
+            </div> -->
+        </div>
+        <div class="rectangle5">
+        </div>
+        <div class="rectangle">
+        </div>
+        <div class="rectangle7">
+        </div>
+        <img anima-src="{% static 'img/confirmationinfo-u3059u30fcu306401@2x.png' %}" class="u3059u30fcu306401" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+        <!-- <img anima-src="{% static 'img/confirmationinfo-combined-shape 1@2x.png' %}" class="combinedshape" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/> -->
+        <div class="u30eau30e2u30a2u30d5u30e9u30a4u30f3u30b0">
+            リモア　フライング
+        </div>
+        <div class="header">
+            <img anima-src="{% static 'img/confirmationinfo-rectangle-2.png' %}" class="rectangle2" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            <div class="group">
+                <div class="rectangle6">
+                </div>
+                <div class="rectangle61">
+                </div>
+                <div class="rectangle62">
+                </div>
+            </div>
+            <div class="group34">
+                <img anima-src="{% static 'img/confirmationinfo-rectangle-24@2x.png' %}" class="rectangle24" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationinfo-line-12@2x.png' %}" class="line12" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationinfo-oval-11 1@2x.png' %}" class="oval11" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationinfo-oval-11 1@2x.png' %}" class="oval111" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationinfo-line-6@2x.png' %}" class="line6" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </div>
+            <div class="group33">
+                <img anima-src="{% static 'img/confirmationinfo-rectangle-23@2x.png' %}" class="rectangle23" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+                <img anima-src="{% static 'img/confirmationinfo-oval-10@2x.png' %}" class="oval10" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="/>
+            </div>
+            <div class="stackedgroup">
+                <div class="enybank">
+                    EnyBank
+                </div>
+            </div>
+        </div>
+        <div class="amazonu58f2u308cu7b4bu30e9u30f3u30adu30f3u30b0uff11u4f4du306eu4ebau6c17u5546">
+            Amazon売れ筋ランキング１位の人気商品！
+            <br/>
+            軽量ながらも壊れにくい特殊な素材を使用
+        </div>
+    </div>
+    <!-- Scripts -->
+    <script>
+        anima_isHidden = function(e) {
+            if (!(e instanceof HTMLElement)) return !1;
+            if (getComputedStyle(e).display == "none") return !0; else if (e.parentNode && anima_isHidden(e.parentNode)) return !0;
+            return !1;
+        };
+        anima_loadAsyncSrcForTag = function(tag) {
+            var elements = document.getElementsByTagName(tag);
+            var toLoad = [];
+            for (var i = 0; i < elements.length; i++) {
+                var e = elements[i];
+                var src = e.getAttribute("src");
+                var loaded = (src != undefined && src.length > 0 && src != 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+                if (loaded) continue;
+                var asyncSrc = e.getAttribute("anima-src");
+                if (asyncSrc == undefined || asyncSrc.length == 0) continue;
+                if (anima_isHidden(e)) continue;
+                toLoad.push(e);
+            }
+            toLoad.sort(function(a, b) {
+                return anima_getTop(a) - anima_getTop(b);
+            });
+            for (var i = 0; i < toLoad.length; i++) {
+                var e = toLoad[i];
+                var asyncSrc = e.getAttribute("anima-src");
+                e.setAttribute("src", asyncSrc);
+            }
+        };
+        anima_pauseHiddenVideos = function(tag) {
+            var elements = document.getElementsByTagName("video");
+            for (var i = 0; i < elements.length; i++) {
+                var e = elements[i];
+                var isPlaying = !!(e.currentTime > 0 && !e.paused && !e.ended && e.readyState > 2);
+                var isHidden = anima_isHidden(e);
+                if (!isPlaying && !isHidden && e.getAttribute("autoplay") == "autoplay") {
+                    e.play();
+                } else if (isPlaying && isHidden) {
+                    e.pause();
+                }
+            }
+        };
+        anima_loadAsyncSrc = function(tag) {
+            anima_loadAsyncSrcForTag("img");
+            anima_loadAsyncSrcForTag("iframe");
+            anima_loadAsyncSrcForTag("video");
+            anima_pauseHiddenVideos();
+        };
+        var anima_getTop = function(e) {
+            var top = 0;
+            do {
+                top += e.offsetTop || 0;
+                e = e.offsetParent;
+            } while (e);
+            return top;
+        };
+        anima_loadAsyncSrc();
+        anima_old_onResize = window.onresize;
+        anima_new_onResize = undefined;
+        anima_updateOnResize = function() {
+            if (anima_new_onResize == undefined || window.onresize != anima_new_onResize) {
+                anima_new_onResize = function(x) {
+                    if (anima_old_onResize != undefined) anima_old_onResize(x);
+                    anima_loadAsyncSrc();
+                };
+                window.onresize = anima_new_onResize;
+                setTimeout(function() {
+                    anima_updateOnResize();
+                }, 3000);
+            }
+        };
+        anima_updateOnResize();
+        setTimeout(function() {
+            anima_loadAsyncSrc();
+        }, 200);
     </script>
-  </p>
-</form>
-
-<p class="text-center"><a href="{% url 'main:cart' %}">back to cart</a></p>
+    <!-- End of Scripts -->
+</div>
 
 {% endblock %}

@@ -3,14 +3,19 @@
 {% load static %}
 {% block content %}
 
-<p>rental</p>
+<img src="{% static 'img/customerinfo-var2@2x.png' %}" style="margin-top:1rem;">
 
+<h2 class="text-center" style="margin:1.5rem 0 1rem;">お客様情報の入力</h2>
+<p class="text-center" style="font-size:14px;">下記の項目をご入力ください。<br>なお、「※」は入力必須項目です。</p>
+
+<div class="grid-x">
+  <div class="cell small-10 small-offset-1">
 <form action="" method="post">
   {{ form }}
   {% csrf_token %}
-  <p class="text-center"><input type="submit" value="confirm" class="button"></p>
+  <p class="text-center"><input type="submit" value="ご入力内容の確認へ" class="button" style="background-color:#FA8072;border-radius:1rem;"></p>
 </form>
 
-<p class="text-center"><a href="{% url 'main:cart' %}">back to cart</a></p>
+<p class="text-center"><a href="{% url 'main:cart' %}" class="button secondary" style="border-radius:1rem;">←前のページに戻る</a></p>
 
 {% endblock %}
